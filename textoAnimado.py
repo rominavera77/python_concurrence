@@ -2,6 +2,7 @@
 import tkinter as tk
 from tkinter import ttk
 import time
+import threading
 
 #Crea la ventana principal
 main_window = tk.Tk()
@@ -32,10 +33,22 @@ def crearAnimacion(a, b, char):
         main_window.update()
 
 #Ejecuta tres animaciones
-crearAnimacion(10,10, 'X')
-crearAnimacion(10,30, 'Y')
-crearAnimacion(10,50, 'Z')
+#crearAnimacion(10,10, 'X')
+#crearAnimacion(10,30, 'Y')
+#crearAnimacion(10,50, 'Z')
 
+thread_1 = threading.Thread(target=crearAnimacion(10,10, 'X'))
+thread_2 = threading.Thread(target=crearAnimacion(10,30, 'Y'))
+thread_3 = threading.Thread(target=crearAnimacion(10,50, 'Z'))
+
+thread_3.start()
+thread_1.start()
+thread_2.start()
+
+thread_1.join(10)
+thread_2.join(10)
+
+time.sleep(50)
 
 # Mantener las siguientes líneas siempre al final del script y en el mismo orden.
 #Coloca la opcion "Salir"
